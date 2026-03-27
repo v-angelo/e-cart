@@ -1,10 +1,10 @@
 import React from "react";
 import ProductCard from "../components/ProductCard";
 
-function AllProducts() {
+function AllProducts({ setCall, call }) {
   return (
     <section>
-      <ProductCard />
+      <ProductCard setCall={setCall} call={call} />
     </section>
   );
 }

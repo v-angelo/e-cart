@@ -1,33 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
+import React from "react";
+
+function Cart({
+  cart,
   addToCart,
-  displayCartItems,
   removeFromCart,
-} from "../services/apiCall";
-
-function Cart() {
-  const [cart, setCart] = useState([]);
-  const [call, setCall] = useState(true);
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    const displayCart = async () => {
-      const data = await displayCartItems();
-      setCart(data);
-      console.log(data);
-
-      let total = data.reduce((acc, curr) => {
-        acc += curr.quantity * curr.price;
-        return acc;
-      }, 0);
-      setTotalPrice(total.toFixed(2));
-    };
-    displayCart();
-  }, [call]);
-
+  call,
+  setCall,
+  itemCount,
+  totalPrice,
+}) {
   return (
-    <article className="max-w-5xl m-10 mx-auto relative">
-      <table className="w-full text-center container mx-auto">
+    <article className="max-w-3xl mt-10 mb-30 mx-auto relative">
+      <table className="w-full text-center mx-auto">
         <thead className="bg-blue-500">
           <tr>
             <th className="p-2">Image</th>
@@ -77,10 +61,16 @@ function Cart() {
         </tbody>
       </table>
 
-      {cart.length > 0 && (
-        <section className="flex justify-between items-center text-2xl font-semibold w-70 absolute -bottom-10 right-0">
-          <h2>Total Price:</h2>
-          <h2>${totalPrice}</h2>
+      {cart?.length > 0 && (
+        <section className="md:w-70 w-50 absolute -bottom-18 right-0">
+          <div className="flex justify-between items-center md:text-xl font-semibold mb-2">
+            <h2>Total Items:</h2>
+            <h2>{itemCount}</h2>
+          </div>
+          <div className="flex justify-between items-center md:text-2xl text-lg font-bold">
+            <h2>Total Price:</h2>
+            <h2>${totalPrice}</h2>
+          </div>
         </section>
       )}
     </article>

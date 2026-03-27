@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { diplayAllProducts, addToCart } from "../services/apiCall";
 
-function ProductCard() {
+function ProductCard({ setCall, call }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -30,6 +30,7 @@ function ProductCard() {
           <button
             onClick={async () => {
               await addToCart(item);
+              setCall(!call);
               alert("Item added to Cart!");
             }}
             className="cursor-pointer p-2 rounded bg-gray-900 text-white"
